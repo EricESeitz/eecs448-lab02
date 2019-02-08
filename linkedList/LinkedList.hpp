@@ -40,15 +40,18 @@ bool LinkedList<T>::search(T value) const
 	bool isFound = false;
 	// ***Eric S. Feb/08/2019: Searches from m_front to back, Compares contents of temp to value. Returns true if matching value found. Else returns false
 
-	do
+	if(temp != nullptr)
 	{
-		if (temp -> getValue() == value)
-		{
-			isFound = true;
-			return(isFound);
-		}
-		temp = temp->getNext();
-	}while(temp->getNext() != nullptr);
+		do
+	 {
+		 if (temp -> getValue() == value)
+		 {
+		 	 isFound = true;
+			 return(isFound);
+		 }
+		 temp = temp->getNext();
+	 }while(temp->getNext() != nullptr);
+  }
 
 	return(isFound);
 }
@@ -127,8 +130,7 @@ bool LinkedList<T>::removeBack()
 			isRemoved = true;
 		}
 		else	//There is only m_front, delete m_front
-		{
-		lastNode = m_front;
+		{		lastNode = m_front;
 		m_front = nullptr;
 		delete lastNode;
 		m_size--;
