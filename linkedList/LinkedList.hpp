@@ -38,7 +38,7 @@ bool LinkedList<T>::search(T value) const
 {
 	Node<T>* temp = m_front;
 	bool isFound = false;
-	// ***Eric S. Feb/08/2019: Searches from m_front back, Compares contents of temp to value
+	// ***Eric S. Feb/08/2019: Searches from m_front to back, Compares contents of temp to value. Returns true if matching value found. Else returns false
 
 	do
 	{
@@ -107,10 +107,33 @@ bool LinkedList<T>::removeBack()
 	Node<T>* lastNode = nullptr;
 	Node<T>* secondintoLast = nullptr;
 	bool isRemoved = false;
+	// ***Eric S. Feb/08/2019: Removes back pointer
 
-	/** TODO
-		Fix this method
-	*/
+	if(!isEmpty())
+	{
+		if (m_front -> getNext() != nullptr)	//there is an m_front and at least 1 next node
+		{
+			secondintoLast = m_front;
+			lastNode = m_front->getNext();
+
+			while (lastNode -> getNext() != nullptr)	//propogate down the list until last node is found
+			{
+				lastNode = lastNode -> getNext();
+				secondintoLast = secondintoLast -> getNext();
+			}
+			secondintoLast->setNext(nullptr);	//disconnect last node from chain
+			delete lastNode;
+			m_size--;
+			isRemoved = true;
+		}
+
+		else	//There is only m_front, delete m_front
+		lastNode = m_front;
+		m_front = nullptr;
+		delete lastNode;
+		m_size--;
+		isRemoved = true;
+	}
 
 	return(isRemoved);
 }
