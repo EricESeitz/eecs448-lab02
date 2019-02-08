@@ -126,13 +126,14 @@ bool LinkedList<T>::removeBack()
 			m_size--;
 			isRemoved = true;
 		}
-
 		else	//There is only m_front, delete m_front
+		{
 		lastNode = m_front;
 		m_front = nullptr;
 		delete lastNode;
 		m_size--;
 		isRemoved = true;
+		}
 	}
 
 	return(isRemoved);
